@@ -958,6 +958,13 @@ input[type = "submit"]{
 .post-page-container #post-page-image {
     border-radius: 10px;
     margin-bottom: 60px;
+    max-height: 670px;
+    width: 1000px;
+}
+
+.post-img {
+    display: flex;
+    justify-content: center;
 }
 
 .news-admin-create-post-container {
@@ -967,7 +974,7 @@ input[type = "submit"]{
 }
 
 .news-admin-create-post-container form{
-    width: 90%;
+    width: 100%;
 }
 
 .news-admin-create-post-container h3{
@@ -2314,4 +2321,8 @@ input[type="number"]:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+input[type = "file"] {
+    padding: 0px;
 }
