@@ -1,6 +1,6 @@
 Website for online school Prolans
 </br>
-<a href="http://t96507v3.beget.tech/">Website Link on free hosting</a>
+<a href="http://t96507v3.beget.tech/">Tap here to see website</a>
 </br>
 <a href="https://www.figma.com/design/KZNcvOsY0np3osIVKshsPQ/Prolans-website-Final?node-id=0-1&t=w1zFbLxn9qtwCBab-1">Design in Figma</a>
 </br>
