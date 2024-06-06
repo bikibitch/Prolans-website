@@ -9,13 +9,13 @@ Administration:
 </br>
 To enable login form, add "admin=1" into URL:
 </br>
-<img width="879" alt="Login form" src="https://github.com/bikibitch/prolans/assets/35295539/e6cb0f37-5435-4085-9386-4c58d246d454">
+![image](https://github.com/bikibitch/Prolans-website/assets/35295539/ef32d944-74e2-4c7d-906e-fc83a15557dd)
 </br></br>
 Log in into admin account
 </br>
 If you logged in successfully, the Log out button and a new Applications page ("Заявки") will appear:
 </br>
-<img width="871" alt="Admin header" src="https://github.com/bikibitch/prolans/assets/35295539/f778acce-bfb4-4aef-abd8-7c83410d43a2">
+![image](https://github.com/bikibitch/Prolans-website/assets/35295539/0b054ebc-c069-47e1-9e7a-56a1d8617c07)
 </br></br>
 Here's how this new page looks:
 <img width="887" alt="Applications page" src="https://github.com/bikibitch/prolans/assets/35295539/48e859cc-9dc4-4b20-a07f-b813c6a6609a">
