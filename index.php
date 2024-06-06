@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Prolans</title>
-    <link rel="icon" type="image/x-icon" href="./images/headerLogo.png">
+    <link rel="icon" type="image/x-icon" href="./images/header/headerLogo.png">
 	<link rel="stylesheet" type ="text/css" href ="./css/style.css">
     <script src="./js/script.js"></script>
     <script src="./js/burger-menu.js" type="module" defer></script>
@@ -15,37 +15,55 @@
 <body> 
     
 	<?php
+
+    include('./php/mysql_connect.php');
+
 	session_start();
-	
-		// Admin Log Out
- 		if(!empty($_GET['action'])&&($_GET['action']=='logout')&&(!empty($_SESSION['admin']))) {
- 			$_SESSION['admin']='no';
+		
+        // MySQL Administration:
+
+        // Admin Log Out
+		$sql = 'SELECT `isAdmin` FROM `Admin`';
+		$r = mysqli_query($db, $sql);
+		$i = mysqli_fetch_assoc($r);
+ 		if(!empty($_GET['action'])&&($_GET['action']=='logout') && $i['isAdmin']) {
+ 			$sql = "UPDATE `Admin` SET `isAdmin` = 0 WHERE `isAdmin` = 1";
+            mysqli_query($db, $sql);
  		}
 
  		//Admin Log In
 	 	if(!empty($_POST['username']) && !empty($_POST['userpassword'])) {
-	 		if(($_POST['username'] == 'admin') && ($_POST['userpassword'] == '123')) { 
-				$_SESSION['admin'] = 'yes'; 
-				print('<p></br>Добро пожаловать, '.$_POST['username'].'!</p>');
+	 		if(($_POST['username'] == 'admin') && ($_POST['userpassword'] == '123')) {
+				$sql = 'UPDATE `Admin` SET `isAdmin` = 1 WHERE `isAdmin` = 0'; 
+                mysqli_query($db, $sql);
+				
+				print('<p class="container"></br>Добро пожаловать, '.$_POST['username'].'!</p>');
 			}
 			else {
-				print('<p></br>Неправильно введен логин и/или пароль!</p>
+				print('
+                    <p class="container">
+                        </br>
+                        Неправильно введен логин и/или пароль!
+                    </p>
 					<div>
-						<form action="index.php'.(!empty($_GET['page'])?'?page='.$_GET['page']:'').
-                        '&adminAccess=1"method="POST">
+						<form class="container" action="index.php'.(!empty($_GET['page'])?'?page='.$_GET['page']:'').
+                        '&admin=1"method="POST">
 							<input type="submit" value="Попробовать еще раз">
 						</form>
 					</div>');
-
 			}
+		} 
+        
+		$sql = 'SELECT `isAdmin` FROM `Admin`';
+        $r = mysqli_query($db, $sql); 
+        $i = mysqli_fetch_assoc($r);
+        
+        $admin = 0;
+		if ($i && $i['isAdmin'])
+		{
+			$admin = 1;
 		}
 
-		if(!empty($_SESSION['admin']) && ($_SESSION['admin']=="yes")) {
-			$admin = 1;
-		} 
-		else {
-			$admin = 0;
-		}
 
 		if($admin) {
  			print('
@@ -53,18 +71,19 @@
                 </br>Выйти</br>
             </a>');
  		}
- 		else if (!empty($_GET['adminAccess'])&&$_GET['adminAccess']){
-		 	print('<form action="index.php'.(!empty($_GET['page'])?'?page='.$_GET['page']:'').'"method="POST">
-		  	<label for="fname">Логин:</label>
-		  	<input type="text" name="username">
-		  	<label for="password">Пароль:</label>
-		  	<input type="password" name ="userpassword">
-		  	<input type="submit" class="button">
-		  	</form></div>');
+ 		else if (!empty($_GET['admin'])&&$_GET['admin']){
+		 	print('
+            <form class="container" action="index.php'.(!empty($_GET['page'])?'?page='.$_GET['page']:'').'" method="POST">
+                <label for="username">Логин:</label>
+                <input type="text" name="username">
+                <label for="userpassword">Пароль:</label>
+                <input type="password" name ="userpassword">
+                <input type="submit" class="button">
+		  	</form>
+        </div>');
 	 	}
 
-        // MySQL connection
-        $db = mysqli_connect("127.0.0.1", "root", "1234567890", "db_prolans");
+        
 
         //  Header
         $sqltext = 'SELECT engTitle, rusTitle FROM Pages 
